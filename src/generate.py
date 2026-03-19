@@ -44,14 +44,11 @@ def main():
             "chatterbox": "weights_path",
             "piper": "model_path",
             "xtts": "model_name",
-            "fish": "model_name",
         }
         key = param_map.get(args.model, "model_path")
         model_kwargs[key] = args.model_path
     if args.speaker_wav:
         model_kwargs["speaker_wav"] = args.speaker_wav
-        if args.model == "fish":
-            model_kwargs["reference_audio"] = args.speaker_wav
     if args.language:
         model_kwargs["language"] = args.language
         if args.model == "chatterbox":

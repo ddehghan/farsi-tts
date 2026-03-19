@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Persian TTS Samples — Farsi TTS with Chatterbox</title>
+    <title>TTS Model Comparison — Persian &amp; English</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 720px;
+            max-width: 860px;
             margin: 0 auto;
             padding: 2rem 1rem;
             background: #fafafa;
@@ -17,86 +17,265 @@
         h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
         .subtitle {
             color: #666;
-            margin-top: 2rem;
-            margin-bottom: 4rem;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
             font-size: 1rem;
-            direction: ltr;
-            text-align: left;
         }
         .subtitle a { color: #0969da; text-decoration: none; }
         .subtitle a:hover { text-decoration: underline; }
-        .sample {
+        h2 {
+            font-size: 1.3rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        .sample-group {
             background: #fff;
             border: 1px solid #e1e4e8;
             border-radius: 8px;
             padding: 1.2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
         .sample-title {
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            direction: ltr;
-            text-align: left;
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
         }
         .sample-text {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.8;
             color: #333;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
-        audio { width: 100%; }
+        .sample-text[dir="rtl"] {
+            font-size: 1.1rem;
+            text-align: right;
+        }
+        .model-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .model-label {
+            min-width: 130px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #555;
+            flex-shrink: 0;
+        }
+        .model-label .cmd {
+            display: block;
+            font-size: 0.72rem;
+            color: #888;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-weight: 400;
+            margin-top: 1px;
+        }
+        audio { width: 100%; flex: 1; }
         footer {
-            margin-top: 2rem;
+            margin-top: 3rem;
             color: #888;
             font-size: 0.85rem;
-            direction: ltr;
-            text-align: left;
         }
         footer a { color: #0969da; text-decoration: none; }
+        .model-info {
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .model-info table { border-collapse: collapse; width: 100%; }
+        .model-info th, .model-info td {
+            text-align: left;
+            padding: 0.4rem 0.8rem;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        .model-info th { font-weight: 600; color: #333; }
     </style>
 </head>
 <body>
-    <h1>نمونه‌های صدای فارسی</h1>
+    <h1>TTS Model Comparison</h1>
     <p class="subtitle">
-        Persian TTS samples generated with
-        <a href="https://github.com/resemble-ai/chatterbox">Chatterbox</a> +
-        <a href="https://huggingface.co/Thomcles/Chatterbox-TTS-Persian-Farsi">Farsi fine-tune</a>
-        — <a href="https://github.com/ddehghan/farsi-tts">Source on GitHub</a>
+        Side-by-side samples from multiple TTS models on the same texts.
+        <a href="https://github.com/ddehghan/farsi-tts">Source on GitHub</a>
     </p>
 
-    <div class="sample">
+    <div class="model-info">
+        <table>
+            <tr><th>Model</th><th>Language</th><th>Command</th></tr>
+            <tr><td>Chatterbox</td><td>Farsi</td><td><code>python src/generate.py input/samples.json</code></td></tr>
+            <tr><td>Piper (Mana)</td><td>Farsi</td><td><code>python src/generate.py input/samples.json -m piper</code></td></tr>
+            <tr><td>Piper (Amir)</td><td>Farsi</td><td><code>python src/generate.py input/samples.json -m piper --model-path models/fa_IR-amir-medium.onnx</code></td></tr>
+            <tr><td>XTTS-v2</td><td>English</td><td><code>python src/generate.py input/samples_en.json -m xtts --speaker-wav ...</code></td></tr>
+            <tr><td>MeloTTS</td><td>English</td><td><code>python src/generate.py input/samples_en.json -m melo</code></td></tr>
+        </table>
+    </div>
+
+    <!-- ==================== FARSI SAMPLES ==================== -->
+    <h2>Farsi Samples</h2>
+
+    <div class="sample-group">
         <div class="sample-title">History — Persepolis</div>
-        <div class="sample-text">تخت جمشید یکی از شگفت‌انگیزترین آثار باستانی جهان است. این مجموعه در دوران هخامنشیان ساخته شد و مرکز تشریفات و جشن‌های نوروزی بود. پادشاهان از سراسر امپراتوری به اینجا می‌آمدند تا هدایای خود را تقدیم کنند.</div>
-        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/history_persepolis.wav"></audio>
+        <div class="sample-text" dir="rtl">تخت جمشید یکی از شگفت‌انگیزترین آثار باستانی جهان است. این مجموعه در دوران هخامنشیان ساخته شد و مرکز تشریفات و جشن‌های نوروزی بود. پادشاهان از سراسر امپراتوری به اینجا می‌آمدند تا هدایای خود را تقدیم کنند.</div>
+        <div class="model-row">
+            <div class="model-label">Chatterbox<span class="cmd">-m chatterbox</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/history_persepolis.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Mana)<span class="cmd">-m piper</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/history_persepolis_piper_mana.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Amir)<span class="cmd">-m piper --model-path amir</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/history_persepolis_piper_amir.wav"></audio>
+        </div>
     </div>
 
-    <div class="sample">
+    <div class="sample-group">
         <div class="sample-title">Cooking — Gheymeh</div>
-        <div class="sample-text">برای پختن قیمه، ابتدا پیاز را ریز خرد کنید و در روغن سرخ کنید تا طلایی شود. سپس گوشت را اضافه کنید و بگذارید رنگ بگیرد. بعد رب گوجه و زردچوبه و لیمو عمانی را بریزید. بگذارید با حرارت کم بپزد تا گوشت کاملاً نرم شود.</div>
-        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/cooking_gheymeh.wav"></audio>
+        <div class="sample-text" dir="rtl">برای پختن قیمه، ابتدا پیاز را ریز خرد کنید و در روغن سرخ کنید تا طلایی شود. سپس گوشت را اضافه کنید و بگذارید رنگ بگیرد. بعد رب گوجه و زردچوبه و لیمو عمانی را بریزید. بگذارید با حرارت کم بپزد تا گوشت کاملاً نرم شود.</div>
+        <div class="model-row">
+            <div class="model-label">Chatterbox<span class="cmd">-m chatterbox</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/cooking_gheymeh.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Mana)<span class="cmd">-m piper</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/cooking_gheymeh_piper_mana.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Amir)<span class="cmd">-m piper --model-path amir</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/cooking_gheymeh_piper_amir.wav"></audio>
+        </div>
     </div>
 
-    <div class="sample">
+    <div class="sample-group">
         <div class="sample-title">Science — Earth</div>
-        <div class="sample-text">زمین تنها سیاره‌ای است که تا امروز حیات در آن کشف شده است. جو زمین از نیتروژن و اکسیژن تشکیل شده و لایه اوزون از ما در برابر اشعه مضر خورشید محافظت می‌کند. آب مایع روی سطح زمین شرایط لازم برای زندگی را فراهم کرده است.</div>
-        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/science_earth.wav"></audio>
+        <div class="sample-text" dir="rtl">زمین تنها سیاره‌ای است که تا امروز حیات در آن کشف شده است. جو زمین از نیتروژن و اکسیژن تشکیل شده و لایه اوزون از ما در برابر اشعه مضر خورشید محافظت می‌کند. آب مایع روی سطح زمین شرایط لازم برای زندگی را فراهم کرده است.</div>
+        <div class="model-row">
+            <div class="model-label">Chatterbox<span class="cmd">-m chatterbox</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/science_earth.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Mana)<span class="cmd">-m piper</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/science_earth_piper_mana.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Amir)<span class="cmd">-m piper --model-path amir</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/science_earth_piper_amir.wav"></audio>
+        </div>
     </div>
 
-    <div class="sample">
+    <div class="sample-group">
         <div class="sample-title">Daily Conversation</div>
-        <div class="sample-text">سلام، حالت چطوره؟ دیروز رفتم بازار یک کیلو گوجه خریدم، خیلی گرون شده بود. بعدش رفتم نانوایی، صف خیلی طولانی بود ولی نان سنگک تازه‌اش واقعاً ارزشش را داشت. فردا هم قراره بریم پارک.</div>
-        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/daily_conversation.wav"></audio>
+        <div class="sample-text" dir="rtl">سلام، حالت چطوره؟ دیروز رفتم بازار یک کیلو گوجه خریدم، خیلی گرون شده بود. بعدش رفتم نانوایی، صف خیلی طولانی بود ولی نان سنگک تازه‌اش واقعاً ارزشش را داشت. فردا هم قراره بریم پارک.</div>
+        <div class="model-row">
+            <div class="model-label">Chatterbox<span class="cmd">-m chatterbox</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/daily_conversation.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Mana)<span class="cmd">-m piper</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/daily_conversation_piper_mana.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Amir)<span class="cmd">-m piper --model-path amir</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/daily_conversation_piper_amir.wav"></audio>
+        </div>
     </div>
 
-    <div class="sample">
+    <div class="sample-group">
         <div class="sample-title">Geography — Iran</div>
-        <div class="sample-text">ایران کشوری با تنوع آب و هوایی بسیار زیاد است. در شمال، جنگل‌های سبز و بارانی هیرکانی قرار دارند که قدمتی چند میلیون ساله دارند. در جنوب، سواحل گرم خلیج فارس و دریای عمان کشیده شده‌اند. کویر لوت در شرق یکی از گرم‌ترین نقاط کره زمین است.</div>
-        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/geography_iran.wav"></audio>
+        <div class="sample-text" dir="rtl">ایران کشوری با تنوع آب و هوایی بسیار زیاد است. در شمال، جنگل‌های سبز و بارانی هیرکانی قرار دارند که قدمتی چند میلیون ساله دارند. در جنوب، سواحل گرم خلیج فارس و دریای عمان کشیده شده‌اند. کویر لوت در شرق یکی از گرم‌ترین نقاط کره زمین است.</div>
+        <div class="model-row">
+            <div class="model-label">Chatterbox<span class="cmd">-m chatterbox</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/geography_iran.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Mana)<span class="cmd">-m piper</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/geography_iran_piper_mana.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">Piper (Amir)<span class="cmd">-m piper --model-path amir</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/geography_iran_piper_amir.wav"></audio>
+        </div>
+    </div>
+
+    <!-- ==================== ENGLISH SAMPLES ==================== -->
+    <h2>English Samples (XTTS-v2 + MeloTTS)</h2>
+
+    <div class="sample-group">
+        <div class="sample-title">History — Persepolis</div>
+        <div class="sample-text">Persepolis is one of the most remarkable ancient sites in the world. It was built during the Achaemenid Empire and served as the ceremonial capital for Nowruz celebrations. Kings from across the empire would travel here to present their tributes.</div>
+        <div class="model-row">
+            <div class="model-label">XTTS-v2<span class="cmd">-m xtts --speaker-wav ...</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/history_persepolis_xtts.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">MeloTTS<span class="cmd">-m melo</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/history_persepolis_melo.wav"></audio>
+        </div>
+    </div>
+
+    <div class="sample-group">
+        <div class="sample-title">Cooking — Gheymeh</div>
+        <div class="sample-text">To cook gheymeh, first finely chop the onions and fry them in oil until golden. Then add the meat and let it brown. Next, add tomato paste, turmeric, and dried lime. Let it simmer on low heat until the meat is perfectly tender.</div>
+        <div class="model-row">
+            <div class="model-label">XTTS-v2<span class="cmd">-m xtts --speaker-wav ...</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/cooking_gheymeh_xtts.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">MeloTTS<span class="cmd">-m melo</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/cooking_gheymeh_melo.wav"></audio>
+        </div>
+    </div>
+
+    <div class="sample-group">
+        <div class="sample-title">Science — Earth</div>
+        <div class="sample-text">Earth is the only planet where life has been discovered so far. Its atmosphere is composed of nitrogen and oxygen, and the ozone layer protects us from harmful solar radiation. Liquid water on the surface has created the conditions necessary for life.</div>
+        <div class="model-row">
+            <div class="model-label">XTTS-v2<span class="cmd">-m xtts --speaker-wav ...</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/science_earth_xtts.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">MeloTTS<span class="cmd">-m melo</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/science_earth_melo.wav"></audio>
+        </div>
+    </div>
+
+    <div class="sample-group">
+        <div class="sample-title">Daily Conversation</div>
+        <div class="sample-text">Hey, how are you doing? Yesterday I went to the market and bought a kilo of tomatoes, they were so expensive. Then I went to the bakery, the line was really long but the fresh sangak bread was totally worth it. Tomorrow we're planning to go to the park.</div>
+        <div class="model-row">
+            <div class="model-label">XTTS-v2<span class="cmd">-m xtts --speaker-wav ...</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/daily_conversation_xtts.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">MeloTTS<span class="cmd">-m melo</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/daily_conversation_melo.wav"></audio>
+        </div>
+    </div>
+
+    <div class="sample-group">
+        <div class="sample-title">Geography — Iran</div>
+        <div class="sample-text">Iran is a country with incredible climate diversity. In the north, the green Hyrcanian rainforests are millions of years old. In the south, the warm coasts of the Persian Gulf and the Sea of Oman stretch along the border. The Lut Desert in the east is one of the hottest places on Earth.</div>
+        <div class="model-row">
+            <div class="model-label">XTTS-v2<span class="cmd">-m xtts --speaker-wav ...</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/geography_iran_xtts.wav"></audio>
+        </div>
+        <div class="model-row">
+            <div class="model-label">MeloTTS<span class="cmd">-m melo</span></div>
+            <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples_en/geography_iran_melo.wav"></audio>
+        </div>
     </div>
 
     <footer>
-        Built with <a href="https://github.com/resemble-ai/chatterbox">Chatterbox TTS</a>
+        Built with
+        <a href="https://github.com/resemble-ai/chatterbox">Chatterbox</a>,
+        <a href="https://github.com/rhasspy/piper">Piper</a>,
+        <a href="https://huggingface.co/MahtaFetrat/Mana-Persian-Piper">Mana</a>,
+        <a href="https://github.com/idiap/coqui-ai-TTS">XTTS-v2</a>,
+        <a href="https://github.com/myshell-ai/MeloTTS">MeloTTS</a>
         · <a href="https://github.com/ddehghan/farsi-tts">View source</a>
     </footer>
 </body>

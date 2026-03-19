@@ -1,6 +1,13 @@
-"""MeloTTS — fast multilingual TTS, good for simple web apps."""
+"""MeloTTS — fast multilingual TTS, CPU-friendly.
 
-import io
+Supported languages: EN, ES, FR, ZH, JP, KR (no Farsi).
+
+Install:
+  git clone https://github.com/myshell-ai/MeloTTS.git
+  cd MeloTTS && pip install -e . && python -m unidic download
+"""
+
+import os
 import tempfile
 
 import torch
@@ -12,11 +19,12 @@ from .base import TTSModel
 class MeloModel(TTSModel):
     name = "melo"
 
-    def __init__(self, language="EN", speaker_id=None, speed=1.0):
+    def __init__(self, language="EN", speaker="EN-US", speed=1.0):
         self.language = language
-        self.speaker_id = speaker_id
+        self.speaker = speaker
         self.speed = speed
         self.model = None
+        self.speaker_id = None
 
     def load(self, device: str) -> None:
         try:
@@ -24,18 +32,19 @@ class MeloModel(TTSModel):
         except ImportError:
             raise ImportError(
                 "MeloTTS is not installed. Install with:\n"
-                "  uv pip install git+https://github.com/myshell-ai/MeloTTS.git"
+                "  git clone https://github.com/myshell-ai/MeloTTS.git\n"
+                "  cd MeloTTS && pip install -e . && python -m unidic download"
             )
 
-        self.device = device
         self.model = TTS(language=self.language, device=device)
-        if self.speaker_id is None:
-            speaker_ids = self.model.hps.data.spk2id
-            self.speaker_id = list(speaker_ids.values())[0]
-        print(f"MeloTTS model loaded on {device}")
+        speaker_ids = self.model.hps.data.spk2id
+        if self.speaker not in speaker_ids:
+            available = ", ".join(speaker_ids.keys())
+            raise ValueError(f"Unknown speaker '{self.speaker}'. Available: {available}")
+        self.speaker_id = speaker_ids[self.speaker]
+        print(f"MeloTTS loaded (language={self.language}, speaker={self.speaker}, device={device})")
 
     def generate(self, text: str) -> tuple[torch.Tensor, int]:
-        # MeloTTS writes to file, so we use a temp file
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=True) as tmp:
             self.model.tts_to_file(text, self.speaker_id, tmp.name, speed=self.speed)
             wav, sr = ta.load(tmp.name)

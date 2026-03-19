@@ -8,7 +8,7 @@ import torch
 from .base import TTSModel
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DEFAULT_VOICE = os.path.join(PROJECT_ROOT, "models", "fa_IR-amir-medium.onnx")
+DEFAULT_VOICE = os.path.join(PROJECT_ROOT, "models", "fa_IR-mana-medium.onnx")
 
 
 class PiperModel(TTSModel):
@@ -17,6 +17,10 @@ class PiperModel(TTSModel):
     def __init__(self, model_path=None, speaker_id=None, length_scale=None,
                  noise_scale=None, noise_w_scale=None):
         self.model_path = model_path or DEFAULT_VOICE
+        # Derive name from voice file: fa_IR-mana-medium.onnx -> piper_mana
+        voice_basename = os.path.splitext(os.path.basename(self.model_path))[0]
+        parts = voice_basename.split("-")
+        self.name = f"piper_{parts[1]}" if len(parts) >= 2 else "piper"
         self.speaker_id = speaker_id
         self.length_scale = length_scale
         self.noise_scale = noise_scale

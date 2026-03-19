@@ -2,7 +2,6 @@
 
 from .base import TTSModel
 from .chatterbox_model import ChatterboxModel
-from .fish_model import FishModel
 from .melo_model import MeloModel
 from .piper_model import PiperModel
 from .xtts_model import XTTSModel
@@ -12,7 +11,6 @@ MODELS: dict[str, type[TTSModel]] = {
     "piper": PiperModel,
     "xtts": XTTSModel,
     "melo": MeloModel,
-    "fish": FishModel,
 }
 
 

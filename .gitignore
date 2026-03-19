@@ -3,6 +3,7 @@ __pycache__/
 .venv/
 input/*/*.wav
 !input/samples/*.wav
+!input/samples_en/*.wav
 models/*.safetensors
 models/*.onnx
 models/*.onnx.json
