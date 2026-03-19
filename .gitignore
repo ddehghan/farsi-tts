@@ -1,6 +1,7 @@
 *.egg-info/
 __pycache__/
 .venv/
-input/*/
+input/*/*.wav
+!input/samples/*.wav
 models/*.safetensors
 .envrc
