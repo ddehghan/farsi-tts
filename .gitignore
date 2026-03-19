@@ -5,3 +5,4 @@ input/*/*.wav
 !input/samples/*.wav
 models/*.safetensors
 .envrc
+.claude/settings.local.json
