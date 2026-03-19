@@ -2,6 +2,11 @@
 
 Text-to-speech for Persian/Farsi using [Chatterbox](https://github.com/resemble-ai/chatterbox) with fine-tuned weights.
 
+## Prerequisites
+
+- [uv](https://docs.astral.sh/uv/getting-started/installation/) — Python package manager
+- [direnv](https://direnv.net/docs/installation.html) — auto-loads `.envrc` when you `cd` into the project
+
 ## Setup
 
 ### 1. Create virtual environment and install dependencies
@@ -36,21 +41,37 @@ Or manually download `t3_fa.safetensors` from [Thomcles/Chatterbox-TTS-Persian-F
 
 ### 4. Run
 
-Create a text file in `input/` (e.g. `input/my_text.txt`), then:
+Create a JSON file in `input/` with an array of entries:
 
-```bash
-python src/generate.py input/my_text.txt
+```json
+[
+  {"filename": "my_clip.wav", "text": "متن فارسی شما اینجا"},
+  {"filename": "another_clip.wav", "text": "متن دیگر"}
+]
 ```
 
-Output is saved to `output/my_text.wav` (named after the input file).
+Then run:
+
+```bash
+python src/generate.py input/samples.json
+```
+
+Output wavs are saved to `input/samples/` (a folder next to the JSON, named after it):
+
+```
+input/
+├── samples.json
+└── samples/
+    ├── my_clip.wav
+    └── another_clip.wav
+```
 
 ## Project structure
 
 ```
 ├── docs/             # documentation
-├── input/            # input text files
+├── input/            # input JSON files and generated wav output
 ├── models/           # model weights (.safetensors)
-├── output/           # generated wav files
 ├── src/
 │   ├── download_model.py  # download model from HuggingFace
 │   └── generate.py        # TTS generation script

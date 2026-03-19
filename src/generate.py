@@ -1,6 +1,7 @@
-"""Generate speech from a text file using the Persian Chatterbox TTS model."""
+"""Generate speech from a JSON input file using the Persian Chatterbox TTS model."""
 
 import argparse
+import json
 import os
 import sys
 
@@ -31,7 +32,7 @@ def load_model(t3_path, device):
     return model
 
 
-def generate(model, text, device):
+def generate(model, text):
     return model.generate(
         text,
         language_id=None,
@@ -43,12 +44,10 @@ def generate(model, text, device):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate Persian TTS from a text file")
-    parser.add_argument("input_file", help="Path to input text file")
+    parser = argparse.ArgumentParser(description="Generate Persian TTS from a JSON input file")
+    parser.add_argument("input_file", help="Path to JSON input file")
     parser.add_argument("--model", default=os.path.join(PROJECT_ROOT, "models", "t3_fa.safetensors"),
                         help="Path to model weights")
-    parser.add_argument("--output-dir", default=os.path.join(PROJECT_ROOT, "output"),
-                        help="Directory for output wav files")
     args = parser.parse_args()
 
     if not os.path.exists(args.input_file):
@@ -60,22 +59,29 @@ def main():
         print("Run: python src/download_model.py")
         sys.exit(1)
 
-    text = open(args.input_file).read().strip()
-    if not text:
-        print("Input file is empty")
-        sys.exit(1)
+    with open(args.input_file) as f:
+        entries = json.load(f)
+
+    # Output goes in a folder next to the input file, named after it
+    input_basename = os.path.splitext(os.path.basename(args.input_file))[0]
+    output_dir = os.path.join(os.path.dirname(args.input_file), input_basename)
+    os.makedirs(output_dir, exist_ok=True)
 
     device = get_device()
     print(f"Using device: {device}")
 
     model = load_model(args.model, device)
-    wav = generate(model, text, device)
 
-    os.makedirs(args.output_dir, exist_ok=True)
-    basename = os.path.splitext(os.path.basename(args.input_file))[0]
-    output_path = os.path.join(args.output_dir, f"{basename}.wav")
-    ta.save(output_path, wav, model.sr)
-    print(f"Saved output to {output_path}")
+    for i, entry in enumerate(entries):
+        filename = entry["filename"]
+        text = entry["text"]
+        print(f"\n[{i+1}/{len(entries)}] Generating: {filename}")
+        wav = generate(model, text)
+        output_path = os.path.join(output_dir, filename)
+        ta.save(output_path, wav, model.sr)
+        print(f"Saved: {output_path}")
+
+    print(f"\nDone. {len(entries)} files saved to {output_dir}")
 
 
 if __name__ == "__main__":
