@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persian TTS Samples — Farsi TTS with Chatterbox</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            background: #fafafa;
+            color: #1a1a1a;
+        }
+        h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            direction: ltr;
+            text-align: left;
+        }
+        .subtitle a { color: #0969da; text-decoration: none; }
+        .subtitle a:hover { text-decoration: underline; }
+        .sample {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .sample-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            direction: ltr;
+            text-align: left;
+        }
+        .sample-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 0.8rem;
+        }
+        audio { width: 100%; }
+        footer {
+            margin-top: 2rem;
+            color: #888;
+            font-size: 0.85rem;
+            direction: ltr;
+            text-align: left;
+        }
+        footer a { color: #0969da; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>نمونه‌های صدای فارسی</h1>
+    <p class="subtitle">
+        Persian TTS samples generated with
+        <a href="https://github.com/resemble-ai/chatterbox">Chatterbox</a> +
+        <a href="https://huggingface.co/Thomcles/Chatterbox-TTS-Persian-Farsi">Farsi fine-tune</a>
+        — <a href="https://github.com/ddehghan/farsi-tts">Source on GitHub</a>
+    </p>
+
+    <div class="sample">
+        <div class="sample-title">History — Persepolis</div>
+        <div class="sample-text">تخت جمشید یکی از شگفت‌انگیزترین آثار باستانی جهان است. این مجموعه در دوران هخامنشیان ساخته شد و مرکز تشریفات و جشن‌های نوروزی بود. پادشاهان از سراسر امپراتوری به اینجا می‌آمدند تا هدایای خود را تقدیم کنند.</div>
+        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/history_persepolis.wav"></audio>
+    </div>
+
+    <div class="sample">
+        <div class="sample-title">Cooking — Gheymeh</div>
+        <div class="sample-text">برای پختن قیمه، ابتدا پیاز را ریز خرد کنید و در روغن سرخ کنید تا طلایی شود. سپس گوشت را اضافه کنید و بگذارید رنگ بگیرد. بعد رب گوجه و زردچوبه و لیمو عمانی را بریزید. بگذارید با حرارت کم بپزد تا گوشت کاملاً نرم شود.</div>
+        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/cooking_gheymeh.wav"></audio>
+    </div>
+
+    <div class="sample">
+        <div class="sample-title">Science — Earth</div>
+        <div class="sample-text">زمین تنها سیاره‌ای است که تا امروز حیات در آن کشف شده است. جو زمین از نیتروژن و اکسیژن تشکیل شده و لایه اوزون از ما در برابر اشعه مضر خورشید محافظت می‌کند. آب مایع روی سطح زمین شرایط لازم برای زندگی را فراهم کرده است.</div>
+        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/science_earth.wav"></audio>
+    </div>
+
+    <div class="sample">
+        <div class="sample-title">Daily Conversation</div>
+        <div class="sample-text">سلام، حالت چطوره؟ دیروز رفتم بازار یک کیلو گوجه خریدم، خیلی گرون شده بود. بعدش رفتم نانوایی، صف خیلی طولانی بود ولی نان سنگک تازه‌اش واقعاً ارزشش را داشت. فردا هم قراره بریم پارک.</div>
+        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/daily_conversation.wav"></audio>
+    </div>
+
+    <div class="sample">
+        <div class="sample-title">Geography — Iran</div>
+        <div class="sample-text">ایران کشوری با تنوع آب و هوایی بسیار زیاد است. در شمال، جنگل‌های سبز و بارانی هیرکانی قرار دارند که قدمتی چند میلیون ساله دارند. در جنوب، سواحل گرم خلیج فارس و دریای عمان کشیده شده‌اند. کویر لوت در شرق یکی از گرم‌ترین نقاط کره زمین است.</div>
+        <audio controls preload="none" src="https://github.com/ddehghan/farsi-tts/raw/main/input/samples/geography_iran.wav"></audio>
+    </div>
+
+    <footer>
+        Built with <a href="https://github.com/resemble-ai/chatterbox">Chatterbox TTS</a>
+        · <a href="https://github.com/ddehghan/farsi-tts">View source</a>
+    </footer>
+</body>
+</html>

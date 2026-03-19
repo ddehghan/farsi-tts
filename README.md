@@ -2,6 +2,10 @@
 
 Text-to-speech for Persian/Farsi using [Chatterbox](https://github.com/resemble-ai/chatterbox) with fine-tuned weights.
 
+## Samples
+
+[Listen to the samples here](https://ddehghan.github.io/farsi-tts/) — five prose clips covering history, cooking, science, daily conversation, and geography.
+
 ## Prerequisites
 
 - [uv](https://docs.astral.sh/uv/getting-started/installation/) — Python package manager
