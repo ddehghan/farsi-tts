@@ -1,0 +1,16 @@
+[project]
+name = "tts"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "chatterbox-tts @ git+https://github.com/resemble-ai/chatterbox.git",
+    "huggingface-hub",
+    "torchcodec",
+]
+
+[tool.uv]
+override-dependencies = [
+    "numpy>=1.26",
+    "transformers==4.52",
+    "setuptools<81",
+]
