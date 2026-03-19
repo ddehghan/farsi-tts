@@ -4,5 +4,7 @@ __pycache__/
 input/*/*.wav
 !input/samples/*.wav
 models/*.safetensors
+models/*.onnx
+models/*.onnx.json
 .envrc
 .claude/settings.local.json
